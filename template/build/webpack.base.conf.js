@@ -3,8 +3,10 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+const webpack = require('webpack')
+const manifest = require('../vendor-manifest.json')
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
@@ -16,34 +18,18 @@ module.exports = {
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production'
-      ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
+    publicPath: process.env.NODE_ENV === 'production' ?
+      config.build.assetsPublicPath : config.dev.assetsPublicPath
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      {{#if_eq build "standalone"}}
       'vue$': 'vue/dist/vue.esm.js',
-      {{/if_eq}}
       '@': resolve('src'),
     }
   },
   module: {
-    rules: [
-      {{#lint}}
-      ...(config.dev.useEslint? [{
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        enforce: 'pre',
-        include: [resolve('src'), resolve('test')],
-        options: {
-          formatter: require('eslint-friendly-formatter'),
-          emitWarning: !config.dev.showEslintErrorsInOverlay
-        }
-      }] : []),
-      {{/lint}}
-      {
+    rules: [{
         test: /\.vue$/,
         loader: 'vue-loader',
         options: vueLoaderConfig
@@ -90,5 +76,11 @@ module.exports = {
     net: 'empty',
     tls: 'empty',
     child_process: 'empty'
-  }
+  },
+  plugins: [
+    // 关联dll拆分出去的依赖
+    new webpack.DllReferencePlugin({
+      manifest
+    })
+  ]
 }

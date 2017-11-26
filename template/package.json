@@ -13,8 +13,8 @@
     "axios": "^0.17.1",
     "iview": "^2.7.3",
     "qf-vue-axios": "^1.1.0",
-    "vue": "^2.5.8"{{#router}},
-    "vue-router": "^3.0.1"{{/router}},
+    "vue": "^2.5.8",
+    "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
@@ -48,6 +48,7 @@
     "ora": "^1.2.0",
     "rimraf": "^2.6.0",
     "sass": "^1.0.0-beta.3",
+    "sass-loader": "^6.0.6",
     "url-loader": "^0.6.2",
     "vue-loader": "^13.5.0",
     "vue-style-loader": "^3.0.3",

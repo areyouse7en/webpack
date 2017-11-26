@@ -4,4 +4,4 @@ Vue.use(Vuex)
 import config from './config'
 
 const store = new Vuex.Store(config)
-export default router
+export default store

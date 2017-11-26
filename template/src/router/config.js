@@ -4,14 +4,10 @@
 const index = () =>
   import ( /* webpackChunkName: "index" */ '@/components/index.vue')
 
-const routes = {
-  path: '',
-  title: '首页',
-  component: index,
-  meta: {
-    requiresAuth: false
-  }
-}
+const routes = [{
+  path: '/',
+  component: index
+}]
 
 export default {
   mode: 'history',

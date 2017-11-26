@@ -6,6 +6,10 @@ import 'iview/dist/styles/iview.css'
 Vue.use(iView)
 /*****框架*****/
 
+/*****插件*****/
+import '@/http'
+/*****插件*****/
+
 /*****配置*****/
 Vue.config.productionTip = false
 import router from '@/router'
